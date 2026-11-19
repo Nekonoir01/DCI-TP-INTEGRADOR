@@ -2,43 +2,35 @@
 Este repositorio contiene el trabajo práctico final para la asignatura de Diseño de Circuitos Impresos de la carrera de posgrado de FIUBA.
 
 * Autor: Rodrigo Antonio Berrezueta Guerrero
-* Título corto del trabajo:  XXXXCOMPLETARXXXX
-* Descripción:  XXXXCOMPLETARXXXX (Debe aclarar la función y el objetivo del cto.)
+* Título corto del trabajo: ESP32 + MPU-6050 + monitor de batería
+* Descripción: Placa basada en el módulo ESP32-WROOM-32D que lee un sensor inercial MPU-6050 (acelerómetro y giróscopo de 6 ejes) y mide el consumo y la tensión de una batería con un monitor de corriente INA219, ambos por I2C. Se alimenta desde USB-C o desde una batería, cuya tensión se eleva a 5 V con un convertidor boost TPS61023; la selección entre ambas fuentes se hace con diodos Schottky y un regulador AMS1117 genera los 3,3 V. Incluye un conversor USB-UART CH340K con circuito de auto-reset para programar el ESP32 sin pulsar botones. El objetivo es obtener un nodo portátil de medición de movimiento que reporte también el estado de su batería.
 * Cursada: OCT-NOV-DIC 2026
 
+![Esquemático](doc/esquematico.svg)
 
 ## Licencia de este trabajo ##
-XXXMENCIONAR ACÁ LA LICENCIAXXX (Editar este párrafo) 
-Y además colcar el archivo de texto de la misma en el directorio raíz.
-Para este TP se pide que la licencia sea de hardware abierto.
-Ver la sección "What license should I use?": https://www.oshwa.org/faq/
+Este trabajo se distribuye bajo la licencia de hardware abierto **CERN Open Hardware Licence Version 2 - Strongly Reciprocal (CERN-OHL-S-2.0)**.
+El texto completo está en el archivo [LICENSE](LICENSE) del directorio raíz.
 
-## Estructura del TP INTEGRADOR ##
+## Estructura del repositorio ##
 
-Se propone y se pide utilizar la siguiente estructura.
+* [doc](doc/): documentación propia (propuesta, notas, cálculos, revisiones).
+* [info](info/): hojas de datos de los componentes principales.
+* [pcb](pcb/): proyecto KiCad (esquemático, PCB, librerías propias y archivos generados como la BOM).
 
-* doc: Toda la información sobre el circuito, principalmente de autoría o procesamiento propio. Por ejemplo:
-  * Notas de ingeniería propias.
-  * Notas de aplicación propias.
-  * Estudios previos, estado del arte, resumen de las investigaciones.
-  * Notas con cálculos.
-  * Dibujos adicionales.
-  * Fotos de los prototipos.
-  * Presupuestos, cotizaciones.
-* info: Toda la iformación recolectada, principalmente de terceros, como por ejemplo:
-  * Hojas de datos.
-  * Notas de aplicación.
-  * Info de productos comerciales.
-  * Info en internet.
-* pcb: Archivos de diseño esquemático y pcb.
+## Componentes principales ##
 
-Dependiendo la magnitud del proyecto, tendremos más o menos información en estos directorios. 
-Revisar los README.md en cada directorio para conocer las pautas de cada uno para este TP.
+| Ref. | Componente | Función |
+|---|---|---|
+| U1 | ESP32-WROOM-32D | Microcontrolador con Wi-Fi/Bluetooth |
+| U2 | CH340K | Conversor USB-UART |
+| U3 | MPU-6050 | Acelerómetro + giróscopo (I2C, 0x68) |
+| U4 | INA219 | Monitor de corriente y tensión de batería (I2C, 0x40) |
+| U5 | AMS1117-3.3 | Regulador lineal 3,3 V |
+| U6 | TPS61023 | Boost de batería a 5 V |
+| J1 | USB4105 | Conector USB-C |
 
-NOTA: El alumno puede y debe borrar de este archivo todo lo que considere necesario, por ejemplo las aclaraciones del docente y esta misma nota.
+La lista de materiales completa, con números de parte, está en [pcb/salidas/BOM.csv](pcb/salidas/BOM.csv).
 
-## Obligatorios para el TP INTEGRADOR ##
-* doc/propuesta/README.md (con textos y links, formato markdown, a imágenes que deben estar en el mismo repo. Las imágenes son las que se piden en las pautas de TP).
-* info/*.pdf (Se piden solo las hojas de datos de los componentes relevantes como circuitos integrados, conectores particulares, módulos, etc. No es necesario poner hojas de pasivos, discretos comunes, conectores estándar.)
-* pcb/* (Acá va el proyecto KiCad, modelos 3D, bibliotecas particulares y archivos generados como BOM, gerbers, etc.). EVITE subir al git archivos temporales de KiCad. Se recomienda usar un .gitignore adecuado.
-* El alumnos es libre de agregar otras cosas, pero siempre tenga en cuenta que el repositorio es público. Evitar colocar información personal o documentación confidencial. 
+## Herramientas ##
+* KiCad 10.0

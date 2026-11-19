@@ -1,0 +1,23 @@
+# --- KiCad: archivos temporales y locales ---
+*.lck
+*.kicad_prl
+*-backups/
+.history/
+_autosave-*
+*-bak
+*.bak
+*~
+fp-info-cache
+\#auto_saved_files#
+*.kicad_sch-bak
+*.kicad_pcb-bak
+_restore_backup_*/
+
+# Gerbers y salidas temporales de fabricación (se suben solo las versiones finales, comprimidas)
+pcb/gerbers/*.gbr
+pcb/gerbers/*.drl
+
+# --- Sistema operativo ---
+Thumbs.db
+desktop.ini
+.DS_Store
